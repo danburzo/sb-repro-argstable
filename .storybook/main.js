@@ -9,5 +9,21 @@ module.exports = {
   ],
   "core": {
     "builder": "webpack5"
+  },
+  webpackFinal: config => {
+    return {
+      ...config,
+      module: {
+        ...config.module,
+        rules: [
+          ...config.module.rules,
+          {
+            test: /\.jsx?$/,
+            loader: 'babel-loader',
+            exclude: new RegExp(require('path').resolve(__dirname, '../node_modules/'))
+          }
+        ]
+      }
+    }
   }
 }
